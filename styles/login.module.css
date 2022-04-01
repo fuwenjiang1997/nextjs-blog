@@ -1,0 +1,16 @@
+.registerPage {
+  width: 500px;
+  margin: 100px auto 0;
+  padding: 40px;
+  border-radius: 10px;
+  background: rgba(189, 189, 189, 0.1);
+}
+
+.toLoginBtn {
+  margin-left: 40px;
+}
+
+.title {
+  margin-bottom: 30px;
+  text-align: center;
+}
