@@ -10,7 +10,7 @@ const homePage: NextPage = () => {
       <div className="content-container">
         {[1, 2, 3, 4, 5, 6].map((item) => {
           return (
-            <div key={item} style={{ marginBottom: '10px' }}>
+            <div key={item} style={{ marginBottom: '20px' }}>
               <HomeArticleCard title="你好"></HomeArticleCard>
             </div>
           )
