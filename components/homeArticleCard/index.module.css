@@ -1,0 +1,22 @@
+.card {
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+}
+.card h4 {
+  cursor: pointer;
+}
+.card h4:hover {
+  color: rgb(111, 119, 150);
+}
+
+.tag {
+  display: flex;
+}
+.tag span {
+  margin-right: 20px;
+  color: #666;
+}
+.cardContent {
+  color: #333;
+}

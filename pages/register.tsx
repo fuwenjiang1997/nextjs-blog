@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from 'react'
 import Link from 'next/link'
 import style from '../styles/login.module.css'
 
-const Register: NextPage = () => {
+const registerPage: NextPage = () => {
   const [uesrName, setUesrName] = useState('')
   const [password, setPassword] = useState('')
 
@@ -70,4 +70,4 @@ const Register: NextPage = () => {
   )
 }
 
-export default Register
+export default registerPage
