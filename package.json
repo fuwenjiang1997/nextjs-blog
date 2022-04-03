@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^3.11.1",
     "antd": "^4.19.3",
+    "bcrypt": "^5.0.1",
     "next": "12.1.2",
     "next-compose-plugins": "^2.2.1",
+    "next-connect": "^0.12.2",
     "next-plugin-antd-less": "^1.8.0",
+    "prisma": "^3.11.1",
     "react": "18.0.0",
     "react-dom": "18.0.0"
   },
