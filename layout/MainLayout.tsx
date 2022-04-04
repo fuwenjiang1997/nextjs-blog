@@ -6,9 +6,10 @@ import Link from 'next/link'
 const { Header, Content } = Layout
 type propsType = {
   page: string
+  userName?: string
 }
 
-const MainLayout: NextPage<propsType> = ({ children, page }) => {
+const MainLayout: NextPage<propsType> = ({ children, page, userName }) => {
   return (
     <Layout>
       <Header className="main-header">
@@ -28,6 +29,7 @@ const MainLayout: NextPage<propsType> = ({ children, page }) => {
             </Menu>
           </Col>
           <Col span={4}>
+            <span>{userName}</span>
             <Button type="primary" shape="round">
               退出
             </Button>
