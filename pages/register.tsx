@@ -1,6 +1,9 @@
 import type { NextPage } from 'next'
 import { Form, Input, Button, Checkbox, Row, Col } from 'antd'
 import { ChangeEvent, useState } from 'react'
+import { useMutation } from 'react-query'
+import axios from 'axios'
+import Router from 'next/router'
 import Link from 'next/link'
 import style from '../styles/login.module.css'
 
@@ -16,11 +19,32 @@ const registerPage: NextPage = () => {
     setPassword(event.target.value)
   }
 
-  function onFinish() {
-    console.log(123)
+  async function registerAction({
+    email,
+    password,
+  }: {
+    email: string
+    password: string
+  }) {
+    await axios.post('api/register', {
+      email: email,
+      password: password,
+    })
+  }
+
+  const registerMutation = useMutation(registerAction, {
+    onSuccess() {
+      Router.push({ pathname: '/login' })
+    },
+    onError(err) {
+      alert(`err: ${err}`)
+    },
+  })
+
+  async function onFinish() {
+    registerMutation.mutate({ email: uesrName, password })
   }
   function onFinishFailed() {}
-  function toLoginPage() {}
 
   return (
     <div className={style.registerPage}>

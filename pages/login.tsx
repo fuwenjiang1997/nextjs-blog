@@ -1,23 +1,47 @@
 import type { NextPage } from 'next'
 import { Form, Input, Button, Checkbox, Row, Col } from 'antd'
 import { ChangeEvent, useState } from 'react'
+import { useMutation } from 'react-query'
 import Link from 'next/link'
+import axios from 'axios'
 import style from '../styles/login.module.css'
 
 const loginPage: NextPage = () => {
-  const [uesrName, setUesrName] = useState('')
+  const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
 
   function changeUserName(event: ChangeEvent<HTMLInputElement>) {
-    setUesrName(event.target.value)
+    setUserName(event.target.value)
   }
 
   function changePassword(event: ChangeEvent<HTMLInputElement>) {
     setPassword(event.target.value)
   }
 
+  async function loginFetch({
+    userName,
+    password,
+  }: {
+    userName: string
+    password: string
+  }) {
+    await axios.post('api/login', {
+      email: userName,
+      password: password,
+    })
+  }
+
+  const loginMutation = useMutation(loginFetch, {
+    onSuccess(res) {
+      alert('登录成功')
+    },
+    onError(err) {
+      alert(`err: ${err}`)
+    },
+  })
+
   function onFinish() {
-    console.log(123)
+    loginMutation.mutate({ userName, password })
   }
   function onFinishFailed() {}
   function toLoginPage() {}
@@ -40,7 +64,7 @@ const loginPage: NextPage = () => {
           name="username"
           rules={[{ required: true, message: 'Please input your username!' }]}
         >
-          <Input value={uesrName} onChange={changeUserName} />
+          <Input value={userName} onChange={changeUserName} />
         </Form.Item>
         <Form.Item
           label="Password"
