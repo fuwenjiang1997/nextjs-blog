@@ -36,7 +36,9 @@ const MainLayout: NextPage<propsType> = ({ children, page, userName }) => {
           </Col>
         </Row>
       </Header>
-      <Content className="main-content">{children}</Content>
+      <Content className="main-content">
+        <div className={page}>{children}</div>
+      </Content>
     </Layout>
   )
 }
