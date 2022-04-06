@@ -1,12 +1,12 @@
 import type { NextPage } from 'next'
 import { Layout, Menu, Row, Col, Button } from 'antd'
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 
 const { Header, Content } = Layout
 type propsType = {
   page: string
-  userName?: string
+  userName: string
 }
 
 const MainLayout: NextPage<propsType> = ({ children, page, userName }) => {
@@ -29,10 +29,12 @@ const MainLayout: NextPage<propsType> = ({ children, page, userName }) => {
             </Menu>
           </Col>
           <Col span={4}>
-            <span>{userName}</span>
-            <Button type="primary" shape="round">
-              退出
-            </Button>
+            <span style={{ marginRight: '10px' }}>{userName}</span>
+            <a href="/api/loginout">
+              <Button type="primary" shape="round">
+                退出
+              </Button>
+            </a>
           </Col>
         </Row>
       </Header>

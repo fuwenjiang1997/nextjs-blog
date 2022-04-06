@@ -23,6 +23,6 @@ model Article {
   id          Int      @id @default(autoincrement())
   user        User     @relation(fields: [userId], references: [id])
   userId      Int
-  creatAt     DateTime @default(now())
+  createAt    DateTime @default(now())
   readAccount Int      @default(0)
 }

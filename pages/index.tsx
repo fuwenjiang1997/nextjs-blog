@@ -18,14 +18,14 @@ type PropsType = {
   user: {
     email: string
   }
-  data: DataType[]
+  data?: DataType[]
 }
 
-const homePage = ({ user, data }: PropsType) => {
+const homePage = ({ data, user }: PropsType) => {
   return (
     <MainLayout page="home" userName={user.email}>
       <div className="content-container">
-        {data.map((item) => {
+        {[{ id: 1, title: 'fjfjfj' }].map((item) => {
           return (
             <div key={item.id} style={{ marginBottom: '20px' }}>
               <HomeArticleCard title={item.title}></HomeArticleCard>

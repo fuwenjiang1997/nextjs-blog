@@ -1,13 +1,20 @@
-import type { NextPage } from 'next'
-import MainLayout from '../layout/MainLayout'
+import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Heading from '@tiptap/extension-heading'
 import { Input, Button } from 'antd'
 import { useState } from 'react'
+import { getUserFromReq } from '../utils.server'
+import MainLayout from '../layout/MainLayout'
 require('../styles/addArticle.less')
 
-const addArticle: NextPage = () => {
+type PropsType = {
+  user: {
+    email: string
+  }
+}
+
+const addArticle = ({ user }: PropsType) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -31,7 +38,7 @@ const addArticle: NextPage = () => {
   }
 
   return (
-    <MainLayout page="add-article">
+    <MainLayout page="add-article" userName={user.email}>
       <Input
         value={title}
         onChange={(event) => setTitle(event.target.value)}
@@ -48,6 +55,28 @@ const addArticle: NextPage = () => {
       </Button>
     </MainLayout>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
+  const user = await getUserFromReq(ctx.req)
+  if (!user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/login',
+      },
+    }
+  }
+
+  return {
+    props: {
+      user: {
+        email: user?.email,
+      },
+    },
+  }
 }
 
 export default addArticle
