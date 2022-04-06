@@ -25,4 +25,6 @@ model Article {
   userId      Int
   createAt    DateTime @default(now())
   readAccount Int      @default(0)
+  title       String
+  content     String
 }

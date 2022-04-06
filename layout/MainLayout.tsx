@@ -6,7 +6,7 @@ import Link from 'next/link'
 const { Header, Content } = Layout
 type propsType = {
   page: string
-  userName: string
+  userName?: string
 }
 
 const MainLayout: NextPage<propsType> = ({ children, page, userName }) => {
@@ -18,7 +18,7 @@ const MainLayout: NextPage<propsType> = ({ children, page, userName }) => {
           <Col span={20}>
             <Menu mode="horizontal" defaultSelectedKeys={[page]}>
               <Menu.Item key="home">
-                <Link href="/">首页</Link>
+                <Link href="/page/1">首页</Link>
               </Menu.Item>
               <Menu.Item key="add-article">
                 <Link href="/add-article">写文章</Link>
@@ -29,12 +29,22 @@ const MainLayout: NextPage<propsType> = ({ children, page, userName }) => {
             </Menu>
           </Col>
           <Col span={4}>
-            <span style={{ marginRight: '10px' }}>{userName}</span>
-            <a href="/api/loginout">
-              <Button type="primary" shape="round">
-                退出
-              </Button>
-            </a>
+            {userName ? (
+              <>
+                <span style={{ marginRight: '10px' }}>{userName}</span>
+                <a href="/api/loginout">
+                  <Button type="primary" shape="round">
+                    退出
+                  </Button>
+                </a>
+              </>
+            ) : (
+              <a href="/api/login">
+                <Button type="primary" shape="round">
+                  登录
+                </Button>
+              </a>
+            )}
           </Col>
         </Row>
       </Header>

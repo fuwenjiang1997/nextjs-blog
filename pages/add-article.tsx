@@ -4,6 +4,8 @@ import StarterKit from '@tiptap/starter-kit'
 import Heading from '@tiptap/extension-heading'
 import { Input, Button } from 'antd'
 import { useState } from 'react'
+import axios from 'axios'
+import { useMutation } from 'react-query'
 import { getUserFromReq } from '../utils.server'
 import MainLayout from '../layout/MainLayout'
 require('../styles/addArticle.less')
@@ -29,12 +31,40 @@ const addArticle = ({ user }: PropsType) => {
   })
   const [title, setTitle] = useState('')
 
+  async function addArticleFetch({
+    title,
+    content,
+  }: {
+    title: string
+    content: string
+  }) {
+    await axios.post('api/addArticle', {
+      title,
+      content,
+    })
+  }
+
+  const addArticleMutation = useMutation(addArticleFetch, {
+    onSuccess() {
+      console.log(1)
+    },
+    onError() {
+      console.log(2)
+    },
+  })
+
   function onSubmit() {
     console.log(`
       点击了提交:
       title: ${title}, \n
       content: ${editor?.getHTML()} \n
     `)
+    const htmlStr = editor?.getHTML()
+    if (!title || !htmlStr) {
+      alert('请填写标题和内容')
+      return
+    }
+    addArticleMutation.mutate({ title: title, content: htmlStr })
   }
 
   return (

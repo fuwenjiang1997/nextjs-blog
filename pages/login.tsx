@@ -4,8 +4,8 @@ import { ChangeEvent, useState } from 'react'
 import { useMutation } from 'react-query'
 import Link from 'next/link'
 import axios from 'axios'
-import style from '../styles/login.module.css'
 import Router from 'next/router'
+import style from '../styles/login.module.css'
 
 const loginPage: NextPage = () => {
   const [userName, setUserName] = useState('')
@@ -34,7 +34,7 @@ const loginPage: NextPage = () => {
 
   const loginMutation = useMutation(loginFetch, {
     onSuccess() {
-      Router.push({ pathname: '/' })
+      Router.push({ pathname: '/page/1' })
     },
     onError(err) {
       alert(`err: ${err}`)
