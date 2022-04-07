@@ -4,12 +4,12 @@ import axios from 'axios'
 import MainLayout from '../../layout/MainLayout'
 import HomeArticleCard from '../../components/homeArticleCard/HomeArticleCard'
 import { getUserFromReq } from '../../utils.server'
-import { ArticleType } from '../index'
-require('../../styles/home.less')
+import { ArticleType } from '../article/[id]'
+import { getArticleListByPage } from '../../server/article'
 
 type PropsType = {
   user: {
-    email: string
+    email?: string
   }
   data: ArticleType[]
 }
@@ -36,18 +36,23 @@ export const getServerSideProps: GetServerSideProps = async (
   const user = await getUserFromReq(ctx.req)
   const { page } = ctx.query
 
-  const result: {
-    data: ArticleType[]
-  } = await (
-    await axios.get(`http://localhost:3000/api/getArticleList?skip=0&take=4`)
-  ).data
+  // const result: {
+  //   data: ArticleType[]
+  // } = await (
+  //   await axios.get(
+  //     `http://localhost:3000/api/getArticleList?skip=${
+  //       (Number(page) - 1) * 4
+  //     }&take=4`
+  //   )
+  // ).data
+  const result = await getArticleListByPage({ skip: Number(page) - 1, take: 4 })
 
   return {
     props: {
       user: {
-        email: user?.email,
+        email: user?.email || null,
       },
-      data: result.data,
+      data: result,
     },
   }
 }

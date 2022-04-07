@@ -1,4 +1,4 @@
-import { prisma, apiHandler } from '../../utils.server'
+import { apiHandler } from '../../utils.server'
 
 export default apiHandler().get(async (req, res) => {
   const id = req.query.id

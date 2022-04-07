@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import style from './index.module.css'
 import Link from 'next/link'
-import { ArticleType } from '../../pages/index'
+import { ArticleType } from '../../pages/article/[id]'
 
 type articleType = {
   data: ArticleType

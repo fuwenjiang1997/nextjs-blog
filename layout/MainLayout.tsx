@@ -39,7 +39,7 @@ const MainLayout: NextPage<propsType> = ({ children, page, userName }) => {
                 </a>
               </>
             ) : (
-              <a href="/api/login">
+              <a href="/login">
                 <Button type="primary" shape="round">
                   登录
                 </Button>

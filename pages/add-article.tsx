@@ -46,19 +46,14 @@ const addArticle = ({ user }: PropsType) => {
 
   const addArticleMutation = useMutation(addArticleFetch, {
     onSuccess() {
-      console.log(1)
+      alert('添加成功！')
     },
     onError() {
-      console.log(2)
+      alert('添加失败！')
     },
   })
 
   function onSubmit() {
-    console.log(`
-      点击了提交:
-      title: ${title}, \n
-      content: ${editor?.getHTML()} \n
-    `)
     const htmlStr = editor?.getHTML()
     if (!title || !htmlStr) {
       alert('请填写标题和内容')
